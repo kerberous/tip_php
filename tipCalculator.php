@@ -21,8 +21,7 @@
 		    $subTotal = process_input($_POST["subTotal"]);
 		    // check if subTotal only contains numbers and great than 0
 		    if (!is_numeric($subTotal) || $subTotal <= 0) {
-		      $subTotalErr = true;
-		      $subTotal = ""; 
+		      $subTotalErr = true; 
 		      $subTotalErrMessage = " Bill subtotal must be a numeric value greater than 0";
 		    }
 	  	}
@@ -36,8 +35,7 @@
 		    if($percentage == "custom"){
 		    	$customPercentage = process_input($_POST["custom"]);
 		    	if (!is_numeric($customPercentage) || $customPercentage <= 0) {
-		      		$percentageErr = true;
-		      		$customPercentage = ""; 
+		      		$percentageErr = true; 
 		      		$percentageErrMessage = " Custom percentage must be a numeric value greater than 0";
 		    	}
 	    	}
@@ -50,8 +48,7 @@
 		  } else {
 		    $splitPerson = process_input($_POST["splitPerson"]);
 	    	if (!ctype_digit($splitPerson)) {
-	      		$splitErr = true;
-		    	$splitPerson = ""; 
+	      		$splitErr = true; 
 		    	$splitErrMessage = " Split person must be a integer value greater than 0";
 	    	}
 		  }
@@ -98,7 +95,7 @@
 
 	<?php
 		$tip = $total = 0;
-		if(!$subTotalErr && !$percentageErr && !$splitErr){
+		if($_SERVER["REQUEST_METHOD"] == "POST" && !$subTotalErr && !$percentageErr && !$splitErr){
 			if($percentage == "custom"){
 				$tip = $subTotal * $customPercentage / 100;
 			}else{
